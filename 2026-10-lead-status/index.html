@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>麋鹿健身 10 月名單狀態統計</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;700&family=Oswald:wght@500;600&display=swap">
+<style>
+:root{
+  --ink:#0D0D0D;
+  --ink-2:#3F4F4E;
+  --ink-3:#6B7C7B;
+  --line:#D6E6E4;
+  --panel:#EEF7F6;
+  --paper:#FFFFFF;
+  --teal:#81D8D0;
+  --teal-btn:#0ABAB5;
+  --teal-deep:#078282;
+  --orange:#FFA500;
+  --thead:#D5F0ED;
+  --display:"LXGW WenKai TC","Noto Sans TC",sans-serif;
+  --body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --num:"Oswald","Noto Sans TC",sans-serif;
+}
+*{box-sizing:border-box}
+html{color-scheme:light}
+[hidden]{display:none !important}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.7;overflow-x:hidden}
+.wrap{max-width:1040px;margin:0 auto}
+section{padding:56px clamp(16px,4vw,48px)}
+.light{background:var(--paper)}
+.tint{background:var(--panel)}
+.dark{background:var(--teal-deep);color:#fff}
+h1,h2{font-family:var(--display);font-weight:700;text-wrap:balance;line-height:1.25;margin:0}
+h1{font-size:clamp(32px,5.2vw,56px)}
+h2{font-size:clamp(24px,3.4vw,36px);margin-bottom:24px}
+h3{font-family:var(--body);font-size:15px;font-weight:700;margin:28px 0 10px;color:var(--ink-2)}
+p{margin:0 0 14px}
+.eyebrow{font-family:var(--num);font-weight:600;font-size:13px;letter-spacing:.16em;color:var(--teal-deep);display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--teal);flex:none}
+.hero{padding-top:72px;padding-bottom:48px}
+.lede{font-size:20px;color:var(--ink-2);max-width:34em;margin-top:22px}
+.meta{font-size:14px;color:var(--ink-3);margin-top:20px}
+.note{font-size:14px;color:var(--ink-3);margin:10px 0 0}
+.dark .note{color:#C3FFFF}
+.num{font-family:var(--num);font-variant-numeric:tabular-nums;font-weight:600}
+/* tabs */
+.tabs{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);display:flex;padding:0 clamp(16px,4vw,48px)}
+.tabs button{appearance:none;background:#fff;border:0;border-bottom:3px solid transparent;min-height:48px;padding:0 20px;margin-bottom:-1px;font-family:var(--body);font-size:16px;font-weight:500;color:var(--ink-3);cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--teal-deep);border-bottom-color:var(--teal-deep);font-weight:700}
+/* cell grid inside one panel */
+.cells{display:grid;gap:1px;grid-template-columns:repeat(2,minmax(0,1fr));border:1px solid var(--line);background:var(--line)}
+.dark .cells{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.35)}
+.cell{padding:20px 18px;background:var(--teal-deep)}
+.cell .lab{font-size:14px;letter-spacing:.06em;color:#C3FFFF}
+.cell .val{font-family:var(--num);font-weight:600;font-size:clamp(34px,4.4vw,48px);line-height:1.15;margin-top:4px;font-variant-numeric:tabular-nums}
+.cell .val.hot{color:var(--orange)}
+.cell .sub{font-family:var(--num);font-size:16px;color:#fff;margin-top:2px}
+.cell .calc{font-size:13.5px;color:#C3FFFF;line-height:1.5;margin-top:6px}
+@media (min-width:641px){.cells{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (min-width:1024px){.cells.six{grid-template-columns:repeat(6,minmax(0,1fr))}}
+/* stacked bars */
+.bars{display:grid;gap:14px}
+.bar{display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;align-items:center}
+.bar .who{font-size:14px;font-weight:700;line-height:1.35}
+.bar .who span{display:block;font-family:var(--num);font-weight:500;color:var(--ink-3);font-size:14px}
+.track{display:flex;width:100%;height:40px;overflow:hidden;background:#fff;border:1px solid var(--line)}
+.seg{flex:none;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--num);font-weight:600;font-size:15px;overflow:hidden;white-space:nowrap}
+.s1{background:#078282;color:#fff}
+.s2{background:#0ABAB5;color:#fff}
+.s3{background:#81D8D0;color:#0D0D0D}
+.s4{background:#B8C4C3;color:#0D0D0D}
+.s5{background:#7C8A89;color:#fff}
+.s6{background:#3F4F4E;color:#fff}
+.s7{background:#E3E8E7;color:#0D0D0D}
+.legend{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:8px 24px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));font-size:14.5px}
+.legend li{display:flex;gap:10px;align-items:baseline;line-height:1.5}
+.legend i{flex:none;width:14px;height:14px;display:inline-block;transform:translateY(2px);border:1px solid var(--line)}
+.legend b{font-weight:700}
+.legend span{color:var(--ink-3)}
+/* tables */
+.tblwrap{overflow-x:auto;margin:20px 0 0;border:1px solid var(--line);background:#fff;max-width:100%}
+table{border-collapse:separate;border-spacing:0;width:100%;min-width:640px;font-size:15px}
+th,td{padding:10px 14px;border-bottom:1px solid var(--line);white-space:nowrap}
+thead th{background:var(--thead);color:var(--ink);font-weight:700;font-size:14px;text-align:center;border-bottom:2px solid var(--teal)}
+tbody th{font-weight:500;text-align:left}
+td{text-align:right;font-family:var(--num);font-variant-numeric:tabular-nums;font-size:16px}
+th:first-child{position:sticky;left:0;z-index:1;border-right:1px solid var(--line)}
+tbody th:first-child{background:#fff}
+tr.total th,tr.total td{font-weight:700;background:#F2FAF9}
+tr.total th:first-child{background:#F2FAF9}
+tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}
+.t4 table{min-width:900px}
+.t3 table{min-width:900px}
+footer{padding:32px clamp(16px,4vw,48px);font-size:13px;color:var(--ink-3);background:#fff}
+footer .wrap{border-top:1px solid var(--line);padding-top:20px}
+@media (max-width:640px){
+  section{padding-top:44px;padding-bottom:44px}
+  .hero{padding-top:52px}
+  .lede{font-size:18px}
+  .bar{grid-template-columns:1fr;gap:4px}
+  .bar .who span{display:inline;margin-left:8px}
+  .legend{grid-template-columns:1fr}
+  .tabs button{flex:1;padding:0 8px}
+}
+</style>
+</head>
+<body>
+
+<div class="tabs" role="tablist" aria-label="報告分頁">
+  <button type="button" role="tab" id="tab-oct" aria-controls="panel-oct" aria-selected="true">10 月報告</button>
+  <button type="button" role="tab" id="tab-aug" aria-controls="panel-aug" aria-selected="false">8 月資料(保留)</button>
+</div>
+
+<div id="panel-oct" role="tabpanel" aria-labelledby="tab-oct">
+
+<section class="light hero">
+<div class="wrap">
+  <div class="eyebrow">麋鹿健身 DEER GYM ・ 名單狀態月報</div>
+  <h1><span style="display:inline-block">2026 年 10 月</span> <span style="display:inline-block">名單填單狀態統計</span></h1>
+  <p class="lede">10 月收到 215 筆表單名單,其中 15 筆預約完成、19 筆預約中、69 筆尚未聯繫上。</p>
+  <p class="meta">統計期間 2026/10/01–10/31(依填表時間)・狀態讀取日 2026/11/01・資料來源:名單表「麋鹿1」</p>
+</div>
+</section>
+
+<section class="dark">
+<div class="wrap">
+  <h2>215 筆名單現在各在哪個階段</h2>
+  <div class="cells six">
+    <div class="cell"><div class="lab">名單數</div><div class="val">215</div></div>
+    <div class="cell"><div class="lab">預約完成</div><div class="val hot">15</div><div class="sub">7.0%</div></div>
+    <div class="cell"><div class="lab">預約中</div><div class="val">19</div><div class="sub">8.8%</div></div>
+    <div class="cell"><div class="lab">尚未聯繫</div><div class="val">69</div><div class="sub">32.1%</div></div>
+    <div class="cell"><div class="lab">拒絕</div><div class="val">67</div><div class="sub">31.2%</div></div>
+    <div class="cell"><div class="lab">失聯</div><div class="val">31</div><div class="sub">14.4%</div></div>
+  </div>
+  <p class="note">另有 14 筆狀態欄尚未回填(6.5%),其中 10 筆是 10/31 當天新進名單。</p>
+</div>
+</section>
+
+<section class="light">
+<div class="wrap">
+  <h2>全店狀態分布,與 9 月對照</h2>
+  <div class="bars" id="bars-month">
+    <div class="bar"><div class="who">9 月<span>205 筆</span></div>
+      <div class="track">
+        <div class="seg s1" style="width:11.71%">24</div>
+        <div class="seg s2" style="width:8.78%">18</div>
+        <div class="seg s3" style="width:7.80%">16</div>
+        <div class="seg s4" style="width:30.73%">63</div>
+        <div class="seg s5" style="width:27.80%">57</div>
+        <div class="seg s6" style="width:13.17%">27</div>
+        <div class="seg s7" style="width:0.00%"></div>
+      </div></div>
+    <div class="bar"><div class="who">10 月<span>215 筆</span></div>
+      <div class="track">
+        <div class="seg s1" style="width:6.98%">15</div>
+        <div class="seg s2" style="width:6.05%">13</div>
+        <div class="seg s3" style="width:2.79%"></div>
+        <div class="seg s4" style="width:32.09%">69</div>
+        <div class="seg s5" style="width:31.16%">67</div>
+        <div class="seg s6" style="width:14.42%">31</div>
+        <div class="seg s7" style="width:6.51%">14</div>
+      </div></div>
+  </div>
+  <ul class="legend">
+    <li><i class="s1"></i><div><b>預約完成</b><br><span>「預約完成」</span></div></li>
+    <li><i class="s2"></i><div><b>預約中・Line/FB/IG聊</b><br><span>「(預約中) Line聊.FB聊.IG聊」</span></div></li>
+    <li><i class="s3"></i><div><b>預約中・改日打</b><br><span>「(預約中) 改日打.再說.再找時間」</span></div></li>
+    <li><i class="s4"></i><div><b>尚未聯繫</b><br><span>「(尚未聯繫) 未接轉語音」</span></div></li>
+    <li><i class="s5"></i><div><b>拒絕</b><br><span>「(拒絕) 不用.不需要.沒時間去.抗拒.反對.」</span></div></li>
+    <li><i class="s6"></i><div><b>失聯</b><br><span>「(失聯) 空號.掛電話.Siri語音」</span></div></li>
+    <li><i class="s7"></i><div><b>未填狀態</b><br><span>「(狀態欄空白,行政尚未回填)」</span></div></li>
+  </ul>
+  <div class="tblwrap">
+  <table id="tbl-month">
+    <thead><tr><th scope="col">狀態</th><th scope="col">9 月筆數</th><th scope="col">9 月佔比</th><th scope="col">10 月筆數</th><th scope="col">10 月佔比</th><th scope="col">佔比變動</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">預約完成</th><td>24</td><td>11.7%</td><td>15</td><td>7.0%</td><td>−4.7 百分點</td></tr>
+      <tr><th scope="row">預約中・Line/FB/IG聊</th><td>18</td><td>8.8%</td><td>13</td><td>6.0%</td><td>−2.7 百分點</td></tr>
+      <tr><th scope="row">預約中・改日打</th><td>16</td><td>7.8%</td><td>6</td><td>2.8%</td><td>−5.0 百分點</td></tr>
+      <tr><th scope="row">尚未聯繫</th><td>63</td><td>30.7%</td><td>69</td><td>32.1%</td><td>+1.4 百分點</td></tr>
+      <tr><th scope="row">拒絕</th><td>57</td><td>27.8%</td><td>67</td><td>31.2%</td><td>+3.4 百分點</td></tr>
+      <tr><th scope="row">失聯</th><td>27</td><td>13.2%</td><td>31</td><td>14.4%</td><td>+1.2 百分點</td></tr>
+      <tr><th scope="row">未填狀態</th><td>0</td><td>0.0%</td><td>14</td><td>6.5%</td><td>+6.5 百分點</td></tr>
+      <tr class="total"><th scope="row">合計</th><td>205</td><td>100%</td><td>215</td><td>100%</td><td></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">9 月數字為 2026/11/01 重新讀取的最新狀態,與 9 月報告頁(2026/10/04 讀取)不同。10 月下旬名單的聯繫天數較短,尚未聯繫與未填狀態後續還會變動。佔比變動以未四捨五入的比率計算。</p>
+</div>
+</section>
+
+<section class="tint">
+<div class="wrap">
+  <h2>三家店的 10 月名單狀態</h2>
+  <div class="bars" id="bars-store">
+    <div class="bar"><div class="who">巨蛋店<span>81 筆</span></div>
+      <div class="track">
+        <div class="seg s1" style="width:6.17%">5</div>
+        <div class="seg s2" style="width:4.94%"></div>
+        <div class="seg s3" style="width:4.94%"></div>
+        <div class="seg s4" style="width:37.04%">30</div>
+        <div class="seg s5" style="width:30.86%">25</div>
+        <div class="seg s6" style="width:12.35%">10</div>
+        <div class="seg s7" style="width:3.70%"></div>
+      </div></div>
+    <div class="bar"><div class="who">和平店<span>66 筆</span></div>
+      <div class="track">
+        <div class="seg s1" style="width:9.09%">6</div>
+        <div class="seg s2" style="width:9.09%">6</div>
+        <div class="seg s3" style="width:3.03%"></div>
+        <div class="seg s4" style="width:18.18%">12</div>
+        <div class="seg s5" style="width:34.85%">23</div>
+        <div class="seg s6" style="width:21.21%">14</div>
+        <div class="seg s7" style="width:4.55%"></div>
+      </div></div>
+    <div class="bar"><div class="who">南華店<span>68 筆</span></div>
+      <div class="track">
+        <div class="seg s1" style="width:5.88%"></div>
+        <div class="seg s2" style="width:4.41%"></div>
+        <div class="seg s3" style="width:0.00%"></div>
+        <div class="seg s4" style="width:39.71%">27</div>
+        <div class="seg s5" style="width:27.94%">19</div>
+        <div class="seg s6" style="width:10.29%">7</div>
+        <div class="seg s7" style="width:11.76%">8</div>
+      </div></div>
+  </div>
+  <div class="tblwrap t3">
+  <table id="tbl-store">
+    <thead><tr><th scope="col">店</th><th scope="col">名單</th><th scope="col">預約完成</th><th scope="col">預約中・Line/FB/IG聊</th><th scope="col">預約中・改日打</th><th scope="col">尚未聯繫</th><th scope="col">拒絕</th><th scope="col">失聯</th><th scope="col">未填狀態</th><th scope="col">預約完成率</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">巨蛋店</th><td>81</td><td>5</td><td>4</td><td>4</td><td>30</td><td>25</td><td>10</td><td>3</td><td>6.2%</td></tr>
+      <tr><th scope="row">和平店</th><td>66</td><td>6</td><td>6</td><td>2</td><td>12</td><td>23</td><td>14</td><td>3</td><td>9.1%</td></tr>
+      <tr><th scope="row">南華店</th><td>68</td><td>4</td><td>3</td><td>0</td><td>27</td><td>19</td><td>7</td><td>8</td><td>5.9%</td></tr>
+      <tr class="total"><th scope="row">合計</th><td>215</td><td>15</td><td>13</td><td>6</td><td>69</td><td>67</td><td>31</td><td>14</td><td>7.0%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">站前店已於 9/15 結束,10 月無站前店名單。</p>
+</div>
+</section>
+
+<section class="light">
+<div class="wrap">
+  <h2>各店名單與預約完成,9 月對 10 月</h2>
+  <div class="tblwrap t4">
+  <table id="tbl-compare">
+    <thead><tr><th scope="col">店</th><th scope="col">名單 9 月</th><th scope="col">名單 10 月</th><th scope="col">名單增減</th><th scope="col">預約完成 9 月</th><th scope="col">預約完成 10 月</th><th scope="col">預約完成增減</th><th scope="col">完成率 9 月</th><th scope="col">完成率 10 月</th><th scope="col">完成率變動</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">巨蛋店</th><td>78</td><td>81</td><td>+3</td><td>11</td><td>5</td><td>−6</td><td>14.1%</td><td>6.2%</td><td>−7.9 百分點</td></tr>
+      <tr><th scope="row">和平店</th><td>55</td><td>66</td><td>+11</td><td>4</td><td>6</td><td>+2</td><td>7.3%</td><td>9.1%</td><td>+1.8 百分點</td></tr>
+      <tr><th scope="row">南華店</th><td>49</td><td>68</td><td>+19</td><td>5</td><td>4</td><td>−1</td><td>10.2%</td><td>5.9%</td><td>−4.3 百分點</td></tr>
+      <tr><th scope="row">站前店(已結束)</th><td>23</td><td>0</td><td>−23</td><td>4</td><td>0</td><td>−4</td><td>17.4%</td><td>—</td><td>—</td></tr>
+      <tr class="total"><th scope="row">合計</th><td>205</td><td>215</td><td>+10</td><td>24</td><td>15</td><td>−9</td><td>11.7%</td><td>7.0%</td><td>−4.7 百分點</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">完成率=預約完成 ÷ 名單數;9 月為 2026/11/01 重新讀取的狀態。</p>
+</div>
+</section>
+
+</div>
+
+<div id="panel-aug" role="tabpanel" aria-labelledby="tab-aug" hidden>
+
+<section class="light hero">
+<div class="wrap">
+  <div class="eyebrow">麋鹿健身 DEER GYM ・ 名單狀態月報</div>
+  <h1><span style="display:inline-block">2026 年 8 月</span> <span style="display:inline-block">名單填單狀態(保留資料)</span></h1>
+  <p class="lede">8 月收到 148 筆表單名單,其中 32 筆預約完成、26 筆預約中。</p>
+  <p class="meta">統計期間 2026/08/01–08/31(依填表時間)・狀態讀取日 2026/11/01・資料來源:名單表「麋鹿1」</p>
+</div>
+</section>
+
+<section class="dark">
+<div class="wrap">
+  <h2>148 筆名單現在各在哪個階段</h2>
+  <div class="cells six">
+    <div class="cell"><div class="lab">名單數</div><div class="val">148</div></div>
+    <div class="cell"><div class="lab">預約完成</div><div class="val hot">32</div><div class="sub">21.6%</div></div>
+    <div class="cell"><div class="lab">預約中</div><div class="val">26</div><div class="sub">17.6%</div></div>
+    <div class="cell"><div class="lab">尚未聯繫</div><div class="val">26</div><div class="sub">17.6%</div></div>
+    <div class="cell"><div class="lab">拒絕</div><div class="val">47</div><div class="sub">31.8%</div></div>
+    <div class="cell"><div class="lab">失聯</div><div class="val">17</div><div class="sub">11.5%</div></div>
+  </div>
+</div>
+</section>
+
+<section class="tint">
+<div class="wrap">
+  <h2>四家店的 8 月名單狀態</h2>
+  <div class="bars" id="bars-aug">
+    <div class="bar"><div class="who">巨蛋店<span>64 筆</span></div>
+      <div class="track">
+        <div class="seg s1" style="width:18.75%">12</div>
+        <div class="seg s2" style="width:6.25%">4</div>
+        <div class="seg s3" style="width:9.38%">6</div>
+        <div class="seg s4" style="width:18.75%">12</div>
+        <div class="seg s5" style="width:31.25%">20</div>
+        <div class="seg s6" style="width:15.62%">10</div>
+      </div></div>
+    <div class="bar"><div class="who">和平店<span>32 筆</span></div>
+      <div class="track">
+        <div class="seg s1" style="width:25.00%">8</div>
+        <div class="seg s2" style="width:9.38%">3</div>
+        <div class="seg s3" style="width:3.12%"></div>
+        <div class="seg s4" style="width:3.12%"></div>
+        <div class="seg s5" style="width:50.00%">16</div>
+        <div class="seg s6" style="width:9.38%">3</div>
+      </div></div>
+    <div class="bar"><div class="who">南華店<span>18 筆</span></div>
+      <div class="track">
+        <div class="seg s1" style="width:16.67%">3</div>
+        <div class="seg s2" style="width:5.56%"></div>
+        <div class="seg s3" style="width:22.22%">4</div>
+        <div class="seg s4" style="width:27.78%">5</div>
+        <div class="seg s5" style="width:22.22%">4</div>
+        <div class="seg s6" style="width:5.56%"></div>
+      </div></div>
+    <div class="bar"><div class="who">站前店<span>34 筆・已結束</span></div>
+      <div class="track">
+        <div class="seg s1" style="width:26.47%">9</div>
+        <div class="seg s2" style="width:5.88%"></div>
+        <div class="seg s3" style="width:14.71%">5</div>
+        <div class="seg s4" style="width:23.53%">8</div>
+        <div class="seg s5" style="width:20.59%">7</div>
+        <div class="seg s6" style="width:8.82%">3</div>
+      </div></div>
+  </div>
+  <ul class="legend">
+    <li><i class="s1"></i><div><b>預約完成</b><br><span>「預約完成」</span></div></li>
+    <li><i class="s2"></i><div><b>預約中・Line/FB/IG聊</b><br><span>「(預約中) Line聊.FB聊.IG聊」</span></div></li>
+    <li><i class="s3"></i><div><b>預約中・改日打</b><br><span>「(預約中) 改日打.再說.再找時間」</span></div></li>
+    <li><i class="s4"></i><div><b>尚未聯繫</b><br><span>「(尚未聯繫) 未接轉語音」</span></div></li>
+    <li><i class="s5"></i><div><b>拒絕</b><br><span>「(拒絕) 不用.不需要.沒時間去.抗拒.反對.」</span></div></li>
+    <li><i class="s6"></i><div><b>失聯</b><br><span>「(失聯) 空號.掛電話.Siri語音」</span></div></li>
+  </ul>
+  <div class="tblwrap">
+  <table id="tbl-aug">
+    <thead><tr><th scope="col">店</th><th scope="col">名單</th><th scope="col">預約完成</th><th scope="col">預約中・Line/FB/IG聊</th><th scope="col">預約中・改日打</th><th scope="col">尚未聯繫</th><th scope="col">拒絕</th><th scope="col">失聯</th><th scope="col">預約完成率</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">巨蛋店</th><td>64</td><td>12</td><td>4</td><td>6</td><td>12</td><td>20</td><td>10</td><td>18.8%</td></tr>
+      <tr><th scope="row">和平店</th><td>32</td><td>8</td><td>3</td><td>1</td><td>1</td><td>16</td><td>3</td><td>25.0%</td></tr>
+      <tr><th scope="row">南華店</th><td>18</td><td>3</td><td>1</td><td>4</td><td>5</td><td>4</td><td>1</td><td>16.7%</td></tr>
+      <tr><th scope="row">站前店(已結束)</th><td>34</td><td>9</td><td>2</td><td>5</td><td>8</td><td>7</td><td>3</td><td>26.5%</td></tr>
+      <tr class="total"><th scope="row">合計</th><td>148</td><td>32</td><td>10</td><td>16</td><td>26</td><td>47</td><td>17</td><td>21.6%</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">8 月數字為 2026/11/01 重新讀取的最新狀態,與 9 月報告頁內的 8 月對照(2026/10/04 讀取)略有不同。</p>
+</div>
+</section>
+
+</div>
+
+<footer>
+<div class="wrap">Orderdan 簡單營銷 ・ 麋鹿健身 2026 年 10 月名單狀態統計 ・ 狀態為 2026/11/01 讀取當下的紀錄</div>
+</footer>
+
+<script>
+(function(){
+  var tabs={oct:document.getElementById('tab-oct'),aug:document.getElementById('tab-aug')};
+  var panels={oct:document.getElementById('panel-oct'),aug:document.getElementById('panel-aug')};
+  function show(k,upd){
+    for(var key in tabs){
+      var on=key===k;
+      tabs[key].setAttribute('aria-selected',on?'true':'false');
+      panels[key].hidden=!on;
+    }
+    if(upd){history.replaceState(null,'','#'+k);}
+  }
+  tabs.oct.addEventListener('click',function(){show('oct',true)});
+  tabs.aug.addEventListener('click',function(){show('aug',true)});
+  window.addEventListener('hashchange',function(){show(location.hash==='#aug'?'aug':'oct',false)});
+  show(location.hash==='#aug'?'aug':'oct',false);
+})();
+</script>
+</body>
+</html>
